@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <!-- this form will POST a single use token to your server -->
+    <form action="http://ilviot.com/payway_show/" method="post">
+        <div id="payway-credit-card"></div>
+        <input id="payway-cc-submit" type="submit" disabled="true"/>
+    </form>
+
+    <script src="https://api.payway.com.au/rest/v1/payway.js">
+    </script>
+    <script type="text/javascript">
+        var submit = document.getElementById('payway-cc-submit');
+        var createdCallback = function( err, frame ) {
+      if ( !err ) {
+        // TODO: Add event handler which calls frame.getToken
+        console.log('test_leo');
+      }
+};
+        payway.createCreditCardFrame({
+            publishableApiKey: 'T10786_PUB_mvmpg9i6r7f46fx856xcpg525pn9x48ig58rg8eh2cjc635j95vrjngz8ixh',
+            onValid: function() { submit.disabled = false; },
+            onInvalid: function() { submit.disabled = true; },
+            tokenMode: 'callback' },
+            createdCallback
+        );
+    </script>       
+  </body>
+</html>
